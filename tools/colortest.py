@@ -26,8 +26,8 @@ def main():
     bg_colors = get_all_bg_colors()
     fg_colors = get_all_fg_colors()
     print("------------ available colors -------------")
-    print("Known FG colors: " + ", ".join(fg_colors))
-    print("Known BG colors: " + ", ".join(bg_colors))
+    print("已知FG颜色: " + ", ".join(fg_colors))
+    print("已知BG颜色: " + ", ".join(bg_colors))
     print("------- showing all combinations ----------")
     for fg in _stash.renderer.FG_COLORS:
         for bg in _stash.renderer.BG_COLORS:

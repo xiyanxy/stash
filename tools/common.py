@@ -16,7 +16,7 @@ def main():
     """
     The main function.
     """
-    print("StaSh root directory: {}".format(get_stash_dir()))
+    print("StaSh根目录: {}".format(get_stash_dir()))
 
 
 if __name__ == "__main__":

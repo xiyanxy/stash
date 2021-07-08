@@ -48,7 +48,7 @@ def apply_to_dir(path, style, recursive=False, in_place=False, verbose=False, py
     :type pyonly: bool
     """
     if verbose:
-        print("Applying style to directory '{}'...".format(path))
+        print("将样式应用到目录'{}'中...".format(path))
     for fn in os.listdir(path):
         fp = os.path.join(path, fn)
         if os.path.isdir(fp) and recursive:
@@ -56,10 +56,10 @@ def apply_to_dir(path, style, recursive=False, in_place=False, verbose=False, py
         elif os.path.isfile(fp):
             if (not fn.endswith(".py")) and pyonly:
                 if verbose:
-                    print("Skipping '{}' (non-py)...".format(fp))
+                    print("跳过'{}' (非.py后缀文件)...".format(fp))
                 continue
             if verbose:
-                print("Applying style to file '{}'...".format(fp))
+                print("将样式应用到文件'{}'中...".format(fp))
             res = apply_to_file(fp, style, in_place=in_place)
             if not in_place:
                 print("# ======= {} =======".format(fp))
@@ -92,7 +92,7 @@ def main():
     if ns.action == "apply":
         start = time.time()
         if not os.path.exists(path):
-            print("Error: path '{}' does not exists!".format(path))
+            print("错误: 路径 '{}' 不存在!".format(path))
             sys.exit(1)
         elif os.path.isdir(path):
             apply_to_dir(path, style, in_place=ns.inplace, recursive=ns.recursive, pyonly=(not ns.all), verbose=ns.verbose)
@@ -102,7 +102,7 @@ def main():
                 print(res)
         end = time.time()
         if ns.verbose:
-            print("Done. Style applied in {}s".format(end - start))
+            print("完成. 样式应用在{}s".format(end - start))
 
 
 if __name__ == "__main__":

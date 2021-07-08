@@ -36,7 +36,7 @@ def parse_gh_target(s):
 
 
 def main():
-    ts = six.moves.input("New target (repo:branch, empty for default): ")
+    ts = six.moves.input("新目标（repo:branch，默认为空）: ")
     t = parse_gh_target(ts)
     if os.path.exists(get_stash_dir()):
         remove_stash()

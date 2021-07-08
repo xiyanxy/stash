@@ -162,14 +162,14 @@ class StaSh(object):
         if self.PY3:
             self.io.write(
                 self.text_style(
-                    'Warning: you are running StaSh in python3. Some commands may not work correctly in python3.\n',
+                    '警告: 你在 python3 中运行 StaSh。某些命令在 python3 中可能无法正常工作。\n',
                     {'color': 'red'},
                     always=True,
                 ),
             )
             self.io.write(
                 self.text_style(
-                    'Please help us improving StaSh by reporting bugs on github.\n',
+                    '请通过在 github 上报告错误来帮助我们改进 StaSh。\n',
                     {
                         'color': 'yellow',
                         'traits': ['italic']
@@ -187,7 +187,7 @@ class StaSh(object):
         if command:
             # do not run command if command is False (but not None)
             if self.runtime.debug:
-                self.logger.debug("Running command: {!r}".format(command))
+                self.logger.debug("运行命令: {!r}".format(command))
             self(command, add_to_history=False, persistent_level=0)
 
     def __call__(self, input_, persistent_level=2, *args, **kwargs):
@@ -265,11 +265,11 @@ class StaSh(object):
                 if f.startswith('lib') and f.endswith('.py') and os.path.isfile(fp):
                     name, _ = os.path.splitext(f)
                     if self.runtime.debug:
-                        self.logger.debug("Attempting to load library '{}'...".format(name))
+                        self.logger.debug("正在尝试加载库 '{}'...".format(name))
                     try:
                         self.__dict__[name] = pyimp.load_source(name, fp)
                     except Exception as e:
-                        self.write_message('%s: failed to load library file (%s)' % (f, repr(e)), error=True)
+                        self.write_message('%s: 加载库文件失败 (%s)' % (f, repr(e)), error=True)
         finally:  # do not modify environ permanently
             os.environ.pop('STASH_ROOT')
 

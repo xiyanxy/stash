@@ -11,12 +11,12 @@ import sys
 IN_PYTHONISTA = sys.executable.find('Pythonista') >= 0
 
 if IN_PYTHONISTA:
-    print("It appears that you are running this file using the pythonista app.")
-    print("The setup.py file is intended for the installation on a PC.")
-    print("Please choose one of the following options:")
-    print("[1] run pythonista-specific installer")
-    print("[2] continue with setup")
-    print("[3] abort")
+    print("您似乎正在使用 pythonista 应用程序运行此文件。")
+    print("setup.py 文件用于在 PC 上进行安装。")
+    print("请选择以下选项之一：")
+    print("[1] 运行 pythonista 特定的安装程序")
+    print("[2] 继续安装")
+    print("[3] 退出")
     try:
         v = int(input(">"))
     except Exception:
@@ -24,7 +24,7 @@ if IN_PYTHONISTA:
     if v == 1:
         # pythonista install
         cmd = "import requests as r; exec(r.get('https://bit.ly/get-stash').text)"
-        print('Executing: "' + cmd + '"') 
+        print('执行: "' + cmd + '"') 
         exec(cmd)
         sys.exit(0)
     elif v == 2:
@@ -33,8 +33,8 @@ if IN_PYTHONISTA:
     else:
         # exit
         if v != 3:
-            print("Unknown input!")
-        print("Aborting...")
+            print("无效输入!")
+        print("中止中...")
         sys.exit(1)
 
 
@@ -96,7 +96,7 @@ def get_stash_version(corepath):
              if line.startswith("__version__"):
                  version = ast.literal_eval(line.split("=")[1].strip())
                  return version
-    raise Exception("Could not find StaSh version in file '{f}'", f=corepath)
+    raise Exception("在 '{f}' 文件中找不到 StaSh 版本", f=corepath)
 
 
 # before we start with the setup, we must be outside of the stash root path.

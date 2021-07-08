@@ -1,14 +1,14 @@
 {
 "reasons": {
-    "C": "This package uses C-Code, which can not be compiled by StaSh.",
-    "unknown": "Reason unknown.",
-    "is_stash": "The name of the package conflicts with StaSh.",
-    "is_pip": "StaSh uses a custom version of PIP. Installing the 'pip' package would likely break StaSh.",
-    "lowlevel_os": "This package uses (relatively) low-level OS functions, which can not be used with Pythonista.",
-    "processes": "This package requires process interaction, which is not possible on iOS",
-    "bundled": "This package is already bundled with Pythonista",
-    "incompatible_dependency": "This package has one or more dependencies which are incompatible with Pythonista.",
-    "bugged": "Installation of this packages is currently critically bugged."
+    "C": "此包使用 C 代码，不能被 StaSh 编译。",
+    "unknown": "原因未知。",
+    "is_stash": "包名与 StaSh 冲突。",
+    "is_pip": "StaSh 使用自定义版本的 PIP。 安装“pip”包可能会破坏 StaSh。",
+    "lowlevel_os": "这个包使用（相对）低级操作系统函数，不能与 Pythonista 一起使用。",
+    "processes": "这个包需要进程交互，在iOS上是不可能的，老弟!",
+    "bundled": "这个包已经和 Pythonista 捆绑了",
+    "incompatible_dependency": "这个包有一个或多个与 Pythonista 不兼容的依赖项。",
+    "bugged": "此软件包的安装目前存在严重问题。"
 },
 "blocklist": {
     "stash": ["is_stash", true, null],

@@ -1,45 +1,38 @@
-#PIP blocklist
+#PIP组织列表
 -----------------------
-Starting with version 0.7.5, StaSh pip includes a blocklist.
+从 0.7.5 版本开始，StaSh pip 包含一个阻止列表。
 
 
-It indicates whether a package should not be installed and what reasons
-should be given.
+它指示是否不应安装软件包以及应给出什么原因。
 
 
-## Motivation
+## 目的为何
 
-The reason for this blocklist is the high number of issues regarding
-installation problems of known incompatible packages. I hope that by
-slowly adding packages to the blocklist we can reduce the amount of
-these issues.
+这个阻止列表的原因是关于已知不兼容包的安装问题的大量问题。 
+我希望通过慢慢将软件包添加到阻止列表中，我们可以减少这些问题的数量。
 
-
-The blocklist was initially discussed in issue #376.
+阻止列表最初是在问题 [#376](https://github.com/ywangd/stash/issues/376) 中讨论的。
 
 
-## Details
-This blocklist is stored as a JSON file at `$STASH_ROOT/data/pip_blocklist.json`.
-It is a dict with two top-level keys:
+## 相关细节
+此阻止列表以 JSON 文件的形式存储在`$STASH_ROOT/data/pip_blocklist.json`中。
+这是一个带有两个主键的字典：
 
 
-**`reasons`** Is a dict mapping a reasonID (str) to a message (str).
-It is used to reduce redundancy of error messages.
+**`reasons`** 是一个将原因ID（str）映射到消息（str）的字典。
+它用于减少错误消息的冗余。
 
 
-**`blocklist`** Is a dict mapping packagename (str) to details (list).
-Every package mentioned in a key of the dict is considered blocklisted.
+**`blocklist`** 是将包名 (str) 映射到详细信息 (list) 的字典。
+字典的键中提到的每个包都被视为已列入阻止名单。
 
-The first (`i=0`) element of the list is the reasonID (str). Use the `reasons` toplevel
-key to determine the actual reason.
+列表的第一个 (`i=0`) 元素是 reasonID (str)。 使用 `reasons` 主键来确定实际原因。
 
-The second (`i=1`) element of the list is a bool indicating whether this
-blocklisting is fatal. If true, it is considered fatal. This means that
-`pip` should abort the installation. Otherwise it is considered nonfatal.
-This means that `pip` should skip the installation, but continue the install.
-This is useful if the package can not be installed, but Pythonista already
-bundles the module.
+列表的第二个 (`i=1`) 元素是一个布尔值，指示此阻止列表是否是可行的。 
+如果为真，则认为是可行的。 这意味着`pip`应该中止其安装。 
+否则，它被认为是不可行的。这意味着`pip`应该跳过其安装，但继续安装其他包。
+如果无法安装包，但 Pythonista 已经捆绑了该模块，这时候就很有用。
 
-The third (`i=2`) is either `null`/`None` or a string. If it is a string
-and the package is marked non-fatal, use this string as the packagename instead.
-In this case, requested extras and version specifier are discarded.
+第三个 (`i=2`) 是 `null`/`None` 或一个字符串。 
+如果是字符串并且包被标记为不可行，请改用此字符串作为包名。
+在这种情况下，请求的附加项和版本说明符将被丢弃。

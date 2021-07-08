@@ -1,3 +1,4 @@
+# coding: utf-8
 from __future__ import print_function
 import os
 import shutil
@@ -7,13 +8,13 @@ import zipfile
 import time
 
 
-DEFAULT_REPO = "ywangd"
+DEFAULT_REPO = "xiyanxy"
 DEFAULT_BRANCH = "master"
 TMPDIR = os.environ.get('TMPDIR', os.environ.get('TMP'))
 URL_TEMPLATE = 'https://github.com/{}/stash/archive/{}.zip'
 TEMP_ZIPFILE = os.path.join(TMPDIR, 'StaSh.zip')
 TEMP_PTI = os.path.join(TMPDIR, 'ptinstaller.py')
-URL_PTI = 'https://raw.githubusercontent.com/ywangd/pythonista-tools-installer/master/ptinstaller.py'
+URL_PTI = 'https://gitee.com/pythonista_StaSh/pythonista-tools-installer/raw/master/ptinstaller.py'
 BASE_DIR = os.path.expanduser('~')
 DEFAULT_INSTALL_DIR = os.path.join(BASE_DIR, 'Documents/site-packages/stash')
 DEFAULT_PTI_PATH = os.path.join(DEFAULT_INSTALL_DIR, "bin", "ptinstaller.py")
@@ -55,7 +56,7 @@ def download_stash(repo=DEFAULT_REPO, branch=DEFAULT_BRANCH, outpath=TEMP_ZIPFIL
     """
     url = URL_TEMPLATE.format(repo, branch)
     if verbose:
-        print('Downloading {} ...'.format(url))
+        print('下载 {} 中...'.format(url))
     r = requests.get(url, stream=True)
     file_size = r.headers.get('Content-Length')
     if file_size is not None:
@@ -78,7 +79,7 @@ def install_pti(url=URL_PTI, outpath=DEFAULT_PTI_PATH, verbose=False):
     :type verbose: bool
     """
     if verbose:
-        print("Downloading {} to {}".format(url, outpath))
+        print("下载 {} 到 {}".format(url, outpath))
     r = requests.get(url)
     with open(outpath, 'w') as outs:
         outs.write(r.text)
@@ -113,7 +114,7 @@ def unzip_into(path, outpath, verbose=False):
     if not os.path.exists(outpath):
         os.makedirs(outpath)
     if verbose:
-        print('Unzipping into %s ...' % outpath)
+        print('解压进%s ...' % outpath)
         
     with zipfile.ZipFile(path) as zipfp:
         toplevel_directory = None
@@ -182,10 +183,10 @@ def pythonista_install(install_path, repo=DEFAULT_REPO, branch=DEFAULT_BRANCH, l
         try:
             download_stash(repo=repo, branch=branch, outpath=zp, verbose=verbose)
         except:
-            raise DownloadError("Unable to download StaSh from {}:{}".format(repo, branch))
+            raise DownloadError("无法下载StaSh从 {}:{}".format(repo, branch))
     else:
         if verbose:
-            print("Using '{}' as source.".format(zippath))
+            print("使用 '{}' 作为源.".format(zippath))
         zp = zippath
     try:
         # install StaSh
@@ -197,7 +198,7 @@ def pythonista_install(install_path, repo=DEFAULT_REPO, branch=DEFAULT_BRANCH, l
     finally:
         # cleanup
         if verbose:
-            print("Cleaning up...")
+            print("清理中...")
         if os.path.exists(zp):
             os.remove(zp)
         remove_unwanted_files(install_path, reraise=False)
@@ -225,7 +226,7 @@ def setup_install(repo=DEFAULT_REPO, branch=DEFAULT_BRANCH, install_path=None, a
         try:
             download_stash(repo=repo, branch=branch, outpath=zp, verbose=verbose)
         except:
-            raise DownloadError("Unable to download StaSh from {}:{}".format(repo, branch))
+            raise DownloadError("无法下载StaSh从 {}:{}".format(repo, branch))
     else:
         zp = zippath
     tp = os.path.join(TMPDIR, "getstash-{}".format(time.time()))
@@ -289,12 +290,12 @@ def main(defs={}):
     elif dist.lower() == "setup":
         setup_install(repo, branch, install_path=install_path, zippath=zippath, dryrun=dryrun, as_user=asuser, verbose=True)
     else:
-        raise ValueError("Invalid install type: {}".format(dist))
+        raise ValueError("安装类型无效: {}".format(dist))
         
     if not is_update:
         # print additional instructions
-        print('Installation completed.')
-        print('Please restart Pythonista and run launch_stash.py under the home directory to start StaSh.')
+        print('安装完成!')
+        print('请重启Pythonista并在主目录下运行launch_stash.py来启动StaSh!')
 
 
 # if __name__ == "__main__":

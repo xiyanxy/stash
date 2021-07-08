@@ -122,7 +122,7 @@ def set_all_encodings(p, encoding, recursive=False, ignore_nonpy=False, force=Fa
                 continue
             if (get_encoding_of_file(fp) is not None) and not force:
                 # skip
-                print("Skipping '{}', it already has an encoding.".format(fp))
+                print("跳过 '{}' 中, 它已经有一个编码。".format(fp))
                 continue
             set_file_encoding(fp, encoding)
 
@@ -196,7 +196,7 @@ def remove_all_encodings(p, recursive=False, ignore_nonpy=True):
                 continue
             if (get_encoding_of_file(fp) is None):
                 # skip
-                print("Skipping '{}', it has no encoding.".format(fp))
+                print("跳过 '{}' 中, 它已经有一个编码。".format(fp))
                 continue
             remove_file_encoding(fp)
 
@@ -214,7 +214,7 @@ def remove_file_encoding(path):
         elif len(lines) >= 2 and is_encoding_line(lines[1]):
             lines.pop(1)
         else:
-            print("No encoding line found in '{}'!".format(path))
+            print("'{}'中未找到编码行!".format(path))
             return
     with open(path, "w") as fout:
         fout.write("".join(lines))
@@ -243,7 +243,7 @@ def main():
 
     if ns.action == "show":
         if not os.path.exists(path):
-            print("Path '{p}' does not exists!".format(p=path))
+            print("路径 '{p}' 不存在!".format(p=path))
             sys.exit(1)
         elif os.path.isdir(path):
             list_all_encodings(path, recursive=ns.recursive, ignore_nonpy=ns.pyonly)
@@ -251,7 +251,7 @@ def main():
             show_file_encoding(path)
     elif ns.action == "set":
         if not os.path.exists(path):
-            print("Path '{p}' does not exists!".format(p=path))
+            print("路径 '{p}' 不存在!".format(p=path))
             sys.exit(1)
         elif os.path.isdir(path):
             set_all_encodings(path, encoding, recursive=ns.recursive, ignore_nonpy=ns.pyonly, force=ns.force)
@@ -259,14 +259,14 @@ def main():
             set_file_encoding(path, encoding)
     elif ns.action == "remove":
         if not os.path.exists(path):
-            print("Path '{p}' does not exists!".format(p=path))
+            print("路径 '{p}' 不存在!".format(p=path))
             sys.exit(1)
         elif os.path.isdir(path):
             remove_all_encodings(path, recursive=ns.recursive, ignore_nonpy=ns.pyonly)
         else:
             remove_file_encoding(path)
     else:
-        print("Unknown action: '{}'!".format(ns.action))
+        print("未知操作: '{}'!".format(ns.action))
         sys.exit(2)
 
 
